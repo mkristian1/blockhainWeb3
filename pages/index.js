@@ -1,3 +1,4 @@
+import { ethers } from 'ethers'
 import Image from 'next/image'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -6,9 +7,9 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [account, setAccount] = useState(null)
-  const { ethereum } = window;
   useEffect(() => {
     const connectWalletHandler = async () => {
+      const { ethereum } = window;
       if (ethereum) {
         try {
           const [accounts] = await ethereum.request({ method: 'eth_requestAccounts' })
@@ -23,11 +24,12 @@ export default function Home() {
   }, [])
 
   const mintftHandler = async () => {
+    const { ethereum } = window;
     try {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
-       
+        console.log(signer)
       }
     } catch (e) {
       console.log(e);
